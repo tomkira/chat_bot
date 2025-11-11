@@ -1,6 +1,8 @@
+const N8N_URL = import.meta.env.VITE_N8N_URL || 'https://n8n.arkeup.com';
+
 const sendRequest = async (data:string, userId: string) => {
   try {
-    const res = await fetch(`/api/webhook/6d388dd5-5ef0-4574-b13d-0969fa382e04`, {
+    const res = await fetch(`${N8N_URL}/webhook/6d388dd5-5ef0-4574-b13d-0969fa382e04`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -27,7 +29,7 @@ const sendRequest = async (data:string, userId: string) => {
 
 const ping = async ()=>{
   try {
-    const res = await fetch(`/api/webhook/ping`, {
+    const res = await fetch(`${N8N_URL}/webhook/ping`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
