@@ -67,13 +67,36 @@ const ChatBubble: React.FC<{ message: ChatMessage }> = ({ message }) => {
         });
         
         const imgData = canvas.toDataURL('image/png');
+        
+        // Use A4 format with proper margins
         const pdf = new jspdf.jsPDF({
             orientation: 'portrait',
-            unit: 'px',
-            format: [canvas.width, canvas.height],
+            unit: 'mm',
+            format: 'a4',
         });
         
-        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+        // A4 dimensions in mm
+        const pdfWidth = 210;
+        const pdfHeight = 297;
+        const margin = 10;
+        
+        // Calculate image dimensions to fit within margins
+        const maxWidth = pdfWidth - (2 * margin);
+        const maxHeight = pdfHeight - (2 * margin);
+        
+        // Calculate scaling to fit content
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const ratio = Math.min(maxWidth / (imgWidth * 0.264583), maxHeight / (imgHeight * 0.264583));
+        
+        const scaledWidth = (imgWidth * 0.264583) * ratio;
+        const scaledHeight = (imgHeight * 0.264583) * ratio;
+        
+        // Center the image
+        const xOffset = (pdfWidth - scaledWidth) / 2;
+        const yOffset = margin;
+        
+        pdf.addImage(imgData, 'PNG', xOffset, yOffset, scaledWidth, scaledHeight);
         pdf.save('data-analysis.pdf');
     } catch (error) {
         console.error("Error generating PDF:", error);
