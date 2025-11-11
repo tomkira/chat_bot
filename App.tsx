@@ -18,6 +18,7 @@ interface Conversation {
 }
 
 const CHAT_HISTORY_KEY = 'gemini_data_analysis_chat_history';
+const WELCOME_MESSAGE = '<div>Bonjour! Je suis votre assistant IA d\'analyse de données. Posez-moi vos questions et je vous aiderai à analyser et comprendre vos données.</div>';
 
 const App: React.FC = () => {
   const [conversations, setConversations] = useState<Record<string, Conversation>>({});
@@ -37,7 +38,7 @@ const App: React.FC = () => {
       messages: [
         {
           role: Role.MODEL,
-          content: '<div>Bonjour! Téléversez des fichiers, connectez une Google Sheet, ou posez-moi simplement une question.</div>',
+          content: WELCOME_MESSAGE,
         },
       ],
       fileData: '',
@@ -106,7 +107,7 @@ const App: React.FC = () => {
                 newConversations[newId] = {
                      id: newId,
                      title: 'Nouveau Chat',
-                     messages: [{ role: Role.MODEL, content: '<div>Bonjour! Téléversez des fichiers, connectez une Google Sheet, ou posez-moi simplement une question.</div>' }],
+                     messages: [{ role: Role.MODEL, content: WELCOME_MESSAGE }],
                      fileData: '', sheetData: '', sheetTitle: null,
                 };
                 setActiveChatId(newId);
@@ -230,9 +231,9 @@ const App: React.FC = () => {
                       Propulsé par votre service n8n
                       </p>
                   </div>
-                  <button onClick={() => setIsSettingsModalOpen(true)} className="p-2 rounded-full hover:bg-gray-800 ml-2" aria-label="Open settings">
+                  {/* <button onClick={() => setIsSettingsModalOpen(true)} className="p-2 rounded-full hover:bg-gray-800 ml-2" aria-label="Open settings">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                  </button>
+                  </button> */}
               </header>
               <main className="flex-1 min-h-0">
                   {activeConversation ? (
