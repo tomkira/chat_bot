@@ -1,0 +1,5 @@
+{
+  "name": "Gemini Google Sheet Analysis Assistant",
+  "description": "An intelligent assistant that allows users to paste data from Google Sheets or other spreadsheet sources and ask questions to receive data analysis and insights powered by the Gemini API.",
+  "requestFramePermissions": []
+}
